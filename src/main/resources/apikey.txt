@@ -1,0 +1,1 @@
+endpoint=https://app.ticketmaster.com/discovery/v2/events.json-apikey=GV7AaEfUWGgyb0QXwOhDquUh5gmpbRMV
