@@ -43,7 +43,6 @@ public class APICall {
 			
 			in.close();
 			jo = (JSONObject) JSONValue.parseWithException(data_filter);
-			System.out.println(jo);
 			return jo;
 		}
 		catch (Exception e ) {

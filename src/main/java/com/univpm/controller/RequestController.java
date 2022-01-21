@@ -15,7 +15,7 @@ import com.univpm.service.I_Stats;
 /**
  * <p> <b>RestController</b> dell'applicazione <br>
  * Questa classe <b>RequestController</b> permette all'utente di visualizzare delle statistiche relative a gli eventi organizzati nel Canada,
- * attravero dei filtri che l'utente stesso puo' scegliere. </p>
+ * attraverso dei filtri che l'utente stesso puo' scegliere. </p>
  * 
  * @author Gerardo
  * @author Sara
@@ -33,20 +33,9 @@ public class RequestController {
 	private I_Stats statsWithresponse;
 	
 	/**
-	 * Questo metodo permette all'utente di visualizzare il numero di eventi che si svolgono nella nazione passata come parametro.
-	 * @param countryCode indica il codice del paese
-	 * @return <code> JSONObject </code> 
-	 */
-	@RequestMapping("/country/{countryCode}")
-	public  JSONObject getEventsForCountry(@PathVariable String countryCode) {
-		response=statsWithresponse.getNumberOfEvents(countryCode,"0","0","0","0"); ; 
-		return response; 
-	}
-	
-	/**
 	 * Questo metodo permette all'utente di visualizzare le statistiche relative ad una nazione. 
 	 * Ovvero mostra il paese relativo o i paesi relativi che hanno il numero minimo di eventi e analogamente il paese o i paesi che hanno il numero massimo di eventi,
-	 * il numero degli eventi del paese e per ultimo la media degli eventi della nazione.
+	 * il numero degli eventi del paese e per ultimo la media degli eventi della nazione scelta.
 	 * 
 	 * @param countryCode indica la nazione
 	 * @param nameCat indica la classificazione o le classificazioni
@@ -72,34 +61,6 @@ public class RequestController {
 		response=statsWithresponse.getstatsNumberOfEvents(countryCode,"0", nameCat);
 		return response; 
 	}
-
-	/**
-	 * Questo metodo permette all'utente di visualizzare il numero di eventi dello stato o degli stati passati come parametro.
-	 * 
-	 * @param countryCode indica la nazione
-	 * @param stateCode indica lo stato o gli stati
-	 * @return <code>JSONObject</code>
-	 */
-	@RequestMapping("/country/{countryCode}/state/{stateCode}")
-	public  JSONObject getEventsForStateOfCountry(@PathVariable String countryCode,@PathVariable String stateCode) {
-		response=statsWithresponse.getNumberOfEvents(countryCode,stateCode,"0","0","0"); ; 	
-		return response; 
-	}
-
-	/**
-	 * Questo metodo permette all'utente di visualizzare il numero di eventi della classificazione o delle classificazioni passate come parametro
-	 * relative allo stato o a gli stati passati come parametro.
-	 * 
-	 * @param countryCode indica la nazione
-	 * @param stateCode indica lo stato o gli stati
-	 * @param nameClass indica la classificazione o le classificazioni
-	 * @return <code>JSONObject</code>
-	 */
-	@RequestMapping("/country/{countryCode}/state/{stateCode}/classification/{nameClass}")
-	public  JSONObject getNumEventsWithClass(@PathVariable String countryCode,@PathVariable String stateCode,@PathVariable String nameClass) {	
-		response= statsWithresponse.getNumberOfEvents(countryCode,stateCode,nameClass,"0","0"); 	
-		return response; 
-	}
 	
 	/**
 	 * Questo metodo permette all'utente di visualizzare le statistiche relative ad un certo periodo, 
@@ -112,23 +73,11 @@ public class RequestController {
 	 * @param end indica la data di fine del periodo
 	 * @return <code>JSONObject</code>
 	 */
-	@RequestMapping("/country/{countryCode}/state/{stateCode}/classification/{nameClass}/startdate/{start}/enddate/{end}")
-	public  JSONObject getNumEventsByStateClassPeriod(@PathVariable String countryCode,@PathVariable String stateCode,
+	@RequestMapping("/stats/country/{countryCode}/state/{stateCode}/classification/{nameClass}/startdate/{start}/enddate/{end}")
+	public  JSONObject getStatsEventsByStateClassPeriod(@PathVariable String countryCode,@PathVariable String stateCode,
 			@PathVariable String nameClass,@PathVariable String start,@PathVariable String end) {	
 		response= statsWithresponse.getNumberOfEvents(countryCode,stateCode,nameClass,start,end); 	
 		return response;	
-	}
-	
-	/**
-	 * Questo metodo permette all'utente di visualizzare le classificazioni sulle quali si possono effettuare le statistiche.
-	 * 
-	 * @return <code>JSONArray</code>
-	 * @throws ParseException
-	 */
-	@RequestMapping("/events/classification")
-	public  JSONArray getClassification() throws ParseException {
-		arr_response=statsWithresponse.getClassificationEvents(); 
-		return arr_response; 
 	}
 	
 	/**
@@ -146,4 +95,54 @@ public class RequestController {
 		return response;
 	}
 
+	/**
+	 * Questo metodo permette all'utente di visualizzare il numero di eventi che si svolgono nella nazione passata come parametro.
+	 * @param countryCode indica il codice del paese
+	 * @return <code> JSONObject </code> 
+	 */
+	@RequestMapping("/country/{countryCode}")
+	public  JSONObject getEventsForCountry(@PathVariable String countryCode) {
+		response=statsWithresponse.getNumberOfEvents(countryCode,"0","0","0","0"); ; 
+		return response; 
+	}
+	
+	/**
+	 * Questo metodo permette all'utente di visualizzare il numero di eventi dello stato o degli stati passati come parametro.
+	 * 
+	 * @param countryCode indica la nazione
+	 * @param stateCode indica lo stato o gli stati
+	 * @return <code>JSONObject</code>
+	 */
+	@RequestMapping("/country/{countryCode}/state/{stateCode}")
+	public  JSONObject getEventsForStateOfCountry(@PathVariable String countryCode,@PathVariable String stateCode) {
+		response=statsWithresponse.getNumberOfEvents(countryCode,stateCode,"0","0","0"); ; 	
+		return response; 
+	}
+	
+	/**
+	 * Questo metodo permette all'utente di visualizzare il numero di eventi della classificazione o delle classificazioni passate come parametro
+	 * relative allo stato o a gli stati passati come parametro.
+	 * 
+	 * @param countryCode indica la nazione
+	 * @param stateCode indica lo stato o gli stati
+	 * @param nameClass indica la classificazione o le classificazioni
+	 * @return <code>JSONObject</code>
+	 */
+	@RequestMapping("/country/{countryCode}/state/{stateCode}/classification/{nameClass}")
+	public  JSONObject getNumEventsWithClass(@PathVariable String countryCode,@PathVariable String stateCode,@PathVariable String nameClass) {	
+		response= statsWithresponse.getNumberOfEvents(countryCode,stateCode,nameClass,"0","0"); 	
+		return response; 
+	}
+	
+	/**
+	 * Questo metodo permette all'utente di visualizzare le classificazioni sulle quali si possono effettuare le statistiche.
+	 * 
+	 * @return <code>JSONArray</code>
+	 * @throws ParseException
+	 */
+	@RequestMapping("/events/classification")
+	public  JSONArray getClassification() throws ParseException {
+		arr_response=statsWithresponse.getClassificationEvents(); 
+		return arr_response; 
+	}
 }

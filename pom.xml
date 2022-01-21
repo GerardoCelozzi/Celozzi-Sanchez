@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.univpm</groupId>
-	<artifactId>Progetto_Celozzi_Sanchez</artifactId>
+	<artifactId>progetto</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Progetto_Celozzi_Sanchez</name>
-	<description>Demo project for Spring Boot</description>
+	<name>Proj_FINALE</name>
+	<description>Ticket Master Project</description>
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
